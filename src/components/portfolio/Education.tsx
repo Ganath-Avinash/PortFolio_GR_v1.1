@@ -19,7 +19,7 @@ export default function Education() {
   ];
 
   return (
-    <section className="max-w-4xl mx-auto px-6 py-20">
+    <section className="max-w-7xl mx-auto px-6 py-20">
       <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-10">My Academic journey so far...</h2>
       
       <div className="space-y-4">

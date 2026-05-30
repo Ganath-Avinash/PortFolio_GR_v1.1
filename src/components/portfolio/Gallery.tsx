@@ -11,7 +11,7 @@ export default function Gallery() {
   ];
 
   return (
-    <section className="max-w-5xl mx-auto px-6 py-20">
+    <section className="max-w-7xl mx-auto px-6 py-20">
       <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-10">Moments I've Saved</h2>
       
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">

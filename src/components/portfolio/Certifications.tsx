@@ -10,7 +10,7 @@ export default function Certifications() {
   ];
 
   return (
-    <section id="certifications" className="py-24 px-6 max-w-4xl mx-auto">
+    <section id="certifications" className="py-24 px-6 max-w-7xl mx-auto">
       <div className="mb-10">
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">Certifications</h2>
         <p className="text-zinc-500 font-semibold tracking-widest uppercase text-sm">Learnings</p>

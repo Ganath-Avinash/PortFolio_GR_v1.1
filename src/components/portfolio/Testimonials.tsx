@@ -22,8 +22,11 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="max-w-6xl mx-auto px-6 py-20">
-      <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-10">Testimonials</h2>
+    <section className="max-w-7xl mx-auto px-6 py-20">
+      <div className="mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">Testimonials</h2>
+        <p className="text-zinc-500 font-semibold tracking-widest uppercase text-sm">Recommendations</p>
+      </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {testimonials.map((test, index) => (
