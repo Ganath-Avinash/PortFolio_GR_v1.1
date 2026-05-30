@@ -14,17 +14,14 @@ export default function GithubFootprint() {
   useEffect(() => {
     setMounted(true);
     
-    fetch("https://github-contributions-api.deno.dev/Ganath-Avinash.json")
+    fetch("https://github-contributions-api.jogruber.de/v4/Ganath-Avinash?y=last")
       .then(res => res.json())
       .then(data => {
-        if (data && data.contributions) {
-          const total = data.contributions
-            .flat()
-            .reduce((acc: number, curr: any) => acc + (curr.contributionCount || 0), 0);
-          setTotalContributions(total);
+        if (data && data.total && typeof data.total.lastYear === 'number') {
+          setTotalContributions(data.total.lastYear);
         }
       })
-      .catch(() => setTotalContributions(542));
+      .catch(() => setTotalContributions(270));
   }, []);
 
   if (!mounted) return null;

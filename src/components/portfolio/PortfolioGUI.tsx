@@ -17,7 +17,7 @@ import Testimonials from "./Testimonials";
 import Contact from "./Contact";
 import Footer from "./Footer";
 import FloatingControls from "./FloatingControls";
-
+import DotGrid from "../DotGrid";
 export default function PortfolioGUI() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
@@ -55,7 +55,21 @@ export default function PortfolioGUI() {
 
   return (
     <div className="relative">
-      <CardNav
+      <div className="fixed inset-0 z-[0] pointer-events-none opacity-50 dark:opacity-40">
+        <DotGrid
+          dotSize={5}
+          gap={15}
+          baseColor={isDark ? "#3f3f46" : "#e4e4e7"}
+          activeColor={isDark ? "#ffffff" : "#000000"}
+          proximity={120}
+          shockRadius={250}
+          shockStrength={5}
+          resistance={750}
+          returnDuration={1.5}
+        />
+      </div>
+      <div className="relative z-10">
+        <CardNav
         logo={<span className="font-extrabold text-xl tracking-tighter">GA</span>}
         items={navItems}
         baseColor={isDark ? "rgba(0,0,0,0.4)" : "rgba(255,255,255,0.7)"}
@@ -79,7 +93,8 @@ export default function PortfolioGUI() {
         <Contact />
       </main>
       <Footer />
-      <FloatingControls />
+        <FloatingControls />
+      </div>
     </div>
   );
 }

@@ -11,7 +11,7 @@ export default function MainApp() {
   const [viewMode, setViewMode] = useState<ViewMode>("terminal");
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden bg-background text-foreground">
+    <div className="relative w-full min-h-screen overflow-x-hidden bg-background text-foreground">
       <AnimatePresence mode="wait">
         {viewMode === "terminal" && (
           <motion.div

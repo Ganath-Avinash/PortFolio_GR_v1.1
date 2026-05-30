@@ -20,7 +20,10 @@ export default function Education() {
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-20">
-      <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-10">My Academic journey so far...</h2>
+      <div className="mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">Education</h2>
+        <p className="text-zinc-500 font-semibold tracking-widest uppercase text-sm">Academics</p>
+      </div>
       
       <div className="space-y-4">
         {education.map((edu, index) => (

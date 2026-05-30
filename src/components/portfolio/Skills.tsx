@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { 
   SiHtml5, SiCss, SiTailwindcss, SiFlask, SiMysql, SiMongodb, 
-  SiSalesforce, SiGit, SiCanva, SiExpress,
+  SiSalesforce, SiGit, SiCanva, SiExpress, SiBootstrap,
   SiLeetcode, SiHackerrank, SiCodechef 
 } from "react-icons/si";
 import { FiDatabase, FiWifi, FiShare2, FiPenTool } from "react-icons/fi";
@@ -50,6 +50,7 @@ export default function Skills() {
               { name: "React JS", icon: FaReact, color: "text-[#61DAFB]" },
               { name: "JavaScript", icon: FaJs, color: "text-[#F7DF1E]" },
               { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-[#06B6D4]" },
+              { name: "Bootstrap", icon: SiBootstrap, color: "text-[#7952B3]" },
               { name: "HTML", icon: SiHtml5, color: "text-[#E34F26]" },
               { name: "CSS", icon: SiCss, color: "text-[#1572B6]" }
             ]}
@@ -80,7 +81,7 @@ export default function Skills() {
             ]}
           />
           <SkillCard 
-            title="Cloud & CRM"
+            title="Cloud & CRM (Basic)"
             items={[
               { name: "Microsoft Azure", icon: VscAzure, color: "text-[#0089D6]" },
               { name: "Salesforce", icon: SiSalesforce, color: "text-[#00A1E0]" }
