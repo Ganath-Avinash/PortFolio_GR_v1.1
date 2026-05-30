@@ -1,4 +1,5 @@
 "use client";
+import SplitText from "../SplitText";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -6,23 +7,24 @@ import { ChevronDown } from "lucide-react";
 
 const experiences = [
   {
-    role: "AI & Full Stack Developer",
-    company: "Freelance",
-    duration: "2023 - Present",
+    role: "Software Developer Intern",
+    company: "Airport Authority Of India",
+    duration: "Summer - 2026 - May",
     details: [
-      "Built production-ready AI applications and full-stack platforms.",
-      "Optimized latency for LLM queries by 40% using caching and streaming.",
-      "Developed responsive, accessible, and high-performance user interfaces."
+      "Developed Assets Management System For AAI IT assets",
+      "It's Simple, Minimalistic and Secure",
+      "Got great reviews from IT head and final review has been cleared",
+      "It will be soon be used in AAI IT Department"
     ]
   },
   {
-    role: "Software Engineering Intern",
-    company: "Tech Startup",
-    duration: "Summer 2023",
+    role: "IEEE Member",
+    company: "IEEE",
+    duration: "Ongoing (Learning)",
     details: [
-      "Collaborated on building a microservices architecture using Node.js and Docker.",
-      "Implemented seamless authentication flows and integrated third-party APIs.",
-      "Participated in agile sprints, code reviews, and system design sessions."
+      "Research about AI and Cys",
+      "Learning from papers",
+      "Trying to publish my own IEEE Standard Paper"
     ]
   }
 ];
@@ -37,7 +39,7 @@ export default function Experience() {
   return (
     <section id="experience" className="max-w-7xl mx-auto px-6 py-20">
       <div className="mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">Experiences</h2>
+        <SplitText text="Experiences" className="text-3xl md:text-4xl font-bold tracking-tight mb-2" delay={50} duration={1.25} ease="power3.out" splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }} threshold={0.1} rootMargin="-50px" textAlign="inherit" tag="h2" />
         <p className="text-zinc-500 font-semibold tracking-widest uppercase text-sm">Work</p>
       </div>
       <div className="flex flex-col gap-4">

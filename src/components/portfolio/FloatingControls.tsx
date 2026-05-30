@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { Moon, Sun, Download } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function FloatingControls() {
@@ -29,7 +29,7 @@ export default function FloatingControls() {
         className="w-12 h-12 rounded-full bg-black dark:bg-white text-white dark:text-black shadow-xl flex items-center justify-center hover:scale-110 transition-all active:scale-95"
         aria-label="Download Resume"
       >
-        <Download size={20} />
+        <span className="font-bold text-xl">R</span>
       </a>
     </div>
   );

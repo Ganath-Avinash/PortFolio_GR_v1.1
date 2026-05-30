@@ -1,4 +1,5 @@
 "use client";
+import SplitText from "../SplitText";
 
 export default function Gallery() {
   const photos = [
@@ -12,7 +13,7 @@ export default function Gallery() {
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-20">
-      <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-10">Moments I've Saved</h2>
+      <SplitText text="Hobbies & Moments" className="text-2xl md:text-3xl font-bold tracking-tight mb-10" delay={50} duration={1.25} ease="power3.out" splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }} threshold={0.1} rootMargin="-50px" textAlign="inherit" tag="h2" />
       
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
         {photos.map((photo, idx) => (

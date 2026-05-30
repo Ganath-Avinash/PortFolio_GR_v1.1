@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import SplitText from "../SplitText";
 
 export default function About() {
   return (
@@ -11,13 +12,26 @@ export default function About() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold mb-6">About Me</h2>
+          <SplitText
+            text="Hello, World"
+            className="text-3xl font-bold mb-6"
+            delay={50}
+            duration={1.25}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-50px"
+            textAlign="left"
+            tag="h2"
+          />
           <div className="space-y-4 text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed">
             <p>
-              I am a Computer Science Engineer with a deep focus on Artificial Intelligence and Full-Stack Development. I thrive at the intersection of innovative research and practical software engineering.
+              I am a B.Tech Computer Science student at Amrita Vishwa Vidyapeetham with a strong foundation in Full-Stack Development, SDLC, and modern software engineering practices. Passionate about building scalable and user-centric applications, I continuously explore Artificial Intelligence and Machine Learning to create innovative solutions that enhance product usability, automation, and overall user experience.
             </p>
             <p>
-              My expertise lies in building scalable systems, integrating advanced AI models into accessible applications, and conducting rigorous technical research. As an active IEEE Research Member, I constantly explore new methodologies to solve complex problems.
+              As a Software Developer Intern at the Airports Authority of India, I contributed to the development of an Asset Management System that streamlined asset tracking and management through a web-based platform. With experience in software development, research, and technical problem-solving, I enjoy leveraging technology to address real-world challenges and deliver impactful digital solutions.
             </p>
           </div>
         </motion.div>

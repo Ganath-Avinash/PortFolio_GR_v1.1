@@ -1,4 +1,5 @@
 "use client";
+import SplitText from "../SplitText";
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -61,7 +62,7 @@ export default function CodingStats() {
 
   return (
     <section id="coding-stats" className="py-24 px-6 max-w-7xl mx-auto">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12 tracking-tight">Coding Stats</h2>
+      <SplitText text="Coding Stats" className="text-3xl md:text-4xl font-bold mb-12 tracking-tight" delay={50} duration={1.25} ease="power3.out" splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }} threshold={0.1} rootMargin="-50px" textAlign="inherit" tag="h2" />
       
       <motion.div 
         variants={containerVariants}

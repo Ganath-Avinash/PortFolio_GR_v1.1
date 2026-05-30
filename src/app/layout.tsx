@@ -10,7 +10,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Ganath Avinash G R | Professional Portfolio",
-  description: "AI Engineer, Full Stack Developer, and Research Enthusiast",
+  description: "UG CSE - Full Stack & AI Integration",
 };
 
 export default function RootLayout({

@@ -1,4 +1,5 @@
 "use client";
+import SplitText from "../SplitText";
 
 import { Quote } from "lucide-react";
 
@@ -24,7 +25,7 @@ export default function Testimonials() {
   return (
     <section className="max-w-7xl mx-auto px-6 py-20">
       <div className="mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">Testimonials</h2>
+        <SplitText text="Testimonials" className="text-3xl md:text-4xl font-bold tracking-tight mb-2" delay={50} duration={1.25} ease="power3.out" splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }} threshold={0.1} rootMargin="-50px" textAlign="inherit" tag="h2" />
         <p className="text-zinc-500 font-semibold tracking-widest uppercase text-sm">Recommendations</p>
       </div>
       

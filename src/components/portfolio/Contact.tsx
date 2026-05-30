@@ -1,4 +1,5 @@
 "use client";
+import SplitText from "../SplitText";
 
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
@@ -26,7 +27,7 @@ export default function Contact() {
     <section id="contact" className="py-24 px-6 bg-zinc-50 dark:bg-zinc-900/50">
       <div className="max-w-7xl mx-auto">
         <div className="mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">Let's Connect</h2>
+          <SplitText text="Let's Connect" className="text-3xl md:text-4xl font-bold tracking-tight mb-2" delay={50} duration={1.25} ease="power3.out" splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }} threshold={0.1} rootMargin="-50px" textAlign="inherit" tag="h2" />
           <p className="text-zinc-500 font-semibold tracking-widest uppercase text-sm">Contact</p>
         </div>
 
@@ -77,13 +78,13 @@ export default function Contact() {
         </motion.form>
 
         <div className="mt-12 flex justify-center gap-6">
-          <a href="#" className="p-3 bg-zinc-200 dark:bg-zinc-800 rounded-full hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">
+          <a href="https://github.com/Ganath-Avinash" target="_blank" rel="noopener noreferrer" className="p-3 bg-zinc-200 dark:bg-zinc-800 rounded-full hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">
             <GithubIcon />
           </a>
-          <a href="#" className="p-3 bg-zinc-200 dark:bg-zinc-800 rounded-full hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">
+          <a href="https://www.linkedin.com/in/ganath-avinash" target="_blank" rel="noopener noreferrer" className="p-3 bg-zinc-200 dark:bg-zinc-800 rounded-full hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">
             <LinkedinIcon />
           </a>
-          <a href="#" className="p-3 bg-zinc-200 dark:bg-zinc-800 rounded-full hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">
+          <a href="mailto:ganathavinash.gr@gmail.com" className="p-3 bg-zinc-200 dark:bg-zinc-800 rounded-full hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors">
             <Mail size={24} />
           </a>
         </div>

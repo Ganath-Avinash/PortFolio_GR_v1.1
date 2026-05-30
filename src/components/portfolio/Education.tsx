@@ -1,27 +1,34 @@
 "use client";
+import SplitText from "../SplitText";
 
 import { GraduationCap } from "lucide-react";
 
 export default function Education() {
   const education = [
     {
-      institution: "Vellore Institute of Technology",
+      institution: "Amrita Vishwa Vidyapeetham",
       degree: "B.Tech in Computer Science and Engineering",
-      duration: "2022 - 2026",
-      details: "Focus on Artificial Intelligence, Data Structures, and Software Engineering."
+      duration: "2024 - 2028",
+      details: "Focus on AI, Data Structures, and Scalable Software Engineering. CGPA: 9.01"
     },
     {
-      institution: "High School",
-      degree: "Pre-University Education",
-      duration: "2020 - 2022",
-      details: "Completed with distinction in Physics, Chemistry, and Mathematics."
+      institution: "Prince Srivari Senior Secondary School",
+      degree: "12th Grade (Bio-Math)",
+      duration: "2023 - 2024",
+      details: "Percentage: 92%"
+    },
+    {
+      institution: "Prince Srivari Senior Secondary School",
+      degree: "10th Grade",
+      duration: "2021 - 2022",
+      details: "Math, Physics, Chemistry, English, Social. Percentage: 88%"
     }
   ];
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-20">
       <div className="mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-2">Education</h2>
+        <SplitText text="Educations" className="text-3xl md:text-4xl font-bold tracking-tight mb-2" delay={50} duration={1.25} ease="power3.out" splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }} threshold={0.1} rootMargin="-50px" textAlign="inherit" tag="h2" />
         <p className="text-zinc-500 font-semibold tracking-widest uppercase text-sm">Academics</p>
       </div>
       

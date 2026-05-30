@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { motion } from "framer-motion";
 import CardNav from "./CardNav";
 import Hero from "./Hero";
 import About from "./About";
@@ -28,7 +29,7 @@ export default function PortfolioGUI() {
       bgColor: isDark ? "#18181b" : "#f4f4f5", // zinc-900 / zinc-100
       textColor: isDark ? "#fff" : "#000",
       links: [
-        { label: "About Me", href: "#about", ariaLabel: "About section" },
+        { label: "Hello, World", href: "#about", ariaLabel: "About section" },
         { label: "Core Skills", href: "#skills", ariaLabel: "Skills section" },
       ]
     },
@@ -78,19 +79,19 @@ export default function PortfolioGUI() {
         buttonTextColor={isDark ? "#000" : "#fff"}
       />
       <main className="flex-grow">
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <CodingStats />
-        <GithubFootprint />
-        <Gallery />
-        <Achievements />
-        <Certifications />
-        <Education />
-        <Testimonials />
-        <Contact />
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }}><Hero /></motion.div>
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }}><About /></motion.div>
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }}><Skills /></motion.div>
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }}><Experience /></motion.div>
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }}><Projects /></motion.div>
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }}><CodingStats /></motion.div>
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }}><GithubFootprint /></motion.div>
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }}><Achievements /></motion.div>
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }}><Certifications /></motion.div>
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }}><Education /></motion.div>
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }}><Gallery /></motion.div>
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }}><Testimonials /></motion.div>
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.8, ease: "easeOut" }}><Contact /></motion.div>
       </main>
       <Footer />
         <FloatingControls />

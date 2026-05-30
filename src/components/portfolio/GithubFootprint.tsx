@@ -1,4 +1,5 @@
 "use client";
+import SplitText from "../SplitText";
 
 import { GitHubCalendar } from "react-github-calendar";
 import { useTheme } from "next-themes";
@@ -28,7 +29,7 @@ export default function GithubFootprint() {
 
   return (
     <section className="py-24 px-6 max-w-7xl mx-auto">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12 tracking-tight">Github Stats</h2>
+      <SplitText text="Github Stats" className="text-3xl md:text-4xl font-bold mb-12 tracking-tight" delay={50} duration={1.25} ease="power3.out" splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }} threshold={0.1} rootMargin="-50px" textAlign="inherit" tag="h2" />
       
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <motion.div 

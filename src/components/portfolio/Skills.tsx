@@ -1,10 +1,11 @@
 "use client";
+import SplitText from "../SplitText";
 
 import { motion } from "framer-motion";
 import { 
   SiHtml5, SiCss, SiTailwindcss, SiFlask, SiMysql, SiMongodb, 
   SiSalesforce, SiGit, SiCanva, SiExpress, SiBootstrap,
-  SiLeetcode, SiHackerrank, SiCodechef 
+  SiLeetcode, SiHackerrank, SiCodechef, SiGithub 
 } from "react-icons/si";
 import { FiDatabase, FiWifi, FiShare2, FiPenTool } from "react-icons/fi";
 import { FaJava, FaWindows, FaReact, FaJs, FaNodeJs, FaFigma } from "react-icons/fa";
@@ -33,7 +34,7 @@ const SkillCard = ({ title, items }: { title: string, items: { name: string, ico
 export default function Skills() {
   return (
     <section id="skills" className="py-24 px-6 max-w-7xl mx-auto">
-      <h2 className="text-3xl md:text-4xl font-bold mb-16 tracking-tight">Technical Skills</h2>
+      <SplitText text="Technical Skills" className="text-3xl md:text-4xl font-bold mb-16 tracking-tight" delay={50} duration={1.25} ease="power3.out" splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }} threshold={0.1} rootMargin="-50px" textAlign="inherit" tag="h2" />
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
         
@@ -88,17 +89,13 @@ export default function Skills() {
             ]}
           />
           <SkillCard 
-            title="Design"
+            title="Version Control & Design"
             items={[
+              { name: "Git", icon: SiGit, color: "text-[#F05032]" },
+              { name: "GitHub", icon: SiGithub, color: "text-zinc-900 dark:text-zinc-100" },
               { name: "Figma", icon: FaFigma, color: "text-[#F24E1E]" },
               { name: "Canva", icon: SiCanva, color: "text-[#00C4CC]" },
               { name: "Stitch", icon: FiPenTool, color: "text-[#FF007F]" }
-            ]}
-          />
-          <SkillCard 
-            title="Tools"
-            items={[
-              { name: "Git", icon: SiGit, color: "text-[#F05032]" }
             ]}
           />
         </motion.div>

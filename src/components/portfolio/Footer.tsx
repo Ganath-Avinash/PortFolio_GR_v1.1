@@ -14,15 +14,15 @@ export default function Footer() {
           <ul className="space-y-2 text-sm text-zinc-500">
             <li><a href="#about" className="hover:text-black dark:hover:text-white transition-colors">About</a></li>
             <li><a href="#projects" className="hover:text-black dark:hover:text-white transition-colors">Projects</a></li>
-            <li><a href="#research" className="hover:text-black dark:hover:text-white transition-colors">Research</a></li>
+            <li><a href="#coding-stats" className="hover:text-black dark:hover:text-white transition-colors">Featured</a></li>
           </ul>
         </div>
         <div>
           <h4 className="font-bold mb-4">Contact</h4>
           <ul className="space-y-2 text-sm text-zinc-500">
-            <li><a href="#" className="hover:text-black dark:hover:text-white transition-colors">LinkedIn</a></li>
-            <li><a href="#" className="hover:text-black dark:hover:text-white transition-colors">GitHub</a></li>
-            <li><a href="#" className="hover:text-black dark:hover:text-white transition-colors">Email</a></li>
+            <li><a href="https://www.linkedin.com/in/ganath-avinash" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition-colors">LinkedIn</a></li>
+            <li><a href="https://github.com/Ganath-Avinash" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition-colors">GitHub</a></li>
+            <li><a href="mailto:ganathavinash.gr@gmail.com" className="hover:text-black dark:hover:text-white transition-colors">Email</a></li>
           </ul>
         </div>
       </div>

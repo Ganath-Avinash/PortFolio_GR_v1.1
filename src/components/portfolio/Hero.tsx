@@ -1,4 +1,5 @@
 "use client";
+import SplitText from "../SplitText";
 
 import { motion } from "framer-motion";
 import Lanyard from "../Lanyard";
@@ -23,21 +24,19 @@ export default function Hero() {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-tight sm:whitespace-nowrap">
             Ganath Avinash <span className="text-zinc-500">G R</span>
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 mb-10 leading-relaxed max-w-lg">
-            AI Engineer • Full Stack Developer • Research Enthusiast
-          </p>
+          <SplitText text="UG CSE - Full Stack Development & AI Integration" className="text-lg sm:text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 mb-10 leading-relaxed max-w-lg block" delay={50} duration={1.25} ease="power3.out" splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }} threshold={0.1} rootMargin="-50px" textAlign="inherit" tag="p" />
           <div className="flex flex-col sm:flex-row items-start gap-4">
             <a
-              href="#projects"
+              href="#skills"
               className="w-full sm:w-auto text-center px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-medium text-lg hover:scale-105 transition-transform"
             >
-              View Projects
+              Tech Skills
             </a>
             <a
-              href="#contact"
+              href="#coding-stats"
               className="w-full sm:w-auto text-center px-8 py-4 border-2 border-zinc-200 dark:border-zinc-800 rounded-full font-medium text-lg hover:border-black dark:hover:border-white transition-colors"
             >
-              Contact Me
+              Coding Stats
             </a>
           </div>
         </motion.div>
