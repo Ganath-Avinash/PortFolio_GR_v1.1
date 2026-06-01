@@ -60,15 +60,13 @@ export default function GithubFootprint() {
           transition={{ delay: 0.1 }}
           className="col-span-1 lg:col-span-3 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-4 md:p-8 bg-white dark:bg-zinc-900 shadow-sm w-full flex items-center justify-center overflow-hidden"
         >
-          <div className="w-full max-w-full">
+          <div className="w-full max-w-full [&>article>div:last-child]:hidden">
             <GitHubCalendar 
               username="Ganath-Avinash"
               colorScheme={theme === "dark" ? "dark" : "light"}
               fontSize={14}
               blockSize={14}
               blockMargin={5}
-              hideTotalCount={true}
-              hideColorLegend={true}
             />
           </div>
         </motion.div>
