@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { Canvas, extend, useFrame } from '@react-three/fiber';
-import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
+import { useGLTF, useTexture, Environment, Lightformer, Image } from '@react-three/drei';
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 
@@ -185,6 +185,25 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
                 metalness={0.8}
               />
             </mesh>
+            {/* Front Image Box */}
+            <Image 
+              url="/imgs/titlecard/b&w.jpg"
+              position={[0, 0.533, 0.015]}
+              scale={[0.63, 0.92]}
+              radius={0.03}
+              zoom={1.15}
+              transparent
+            />
+            {/* Back Image Box */}
+            <Image 
+              url="/imgs/titlecard/backside.jpg"
+              position={[0, 0.533, -0.015]}
+              rotation={[0, Math.PI, 0]}
+              scale={[0.63, 0.92]}
+              radius={0.03}
+              zoom={1}
+              transparent
+            />
             <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
             <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
           </group>

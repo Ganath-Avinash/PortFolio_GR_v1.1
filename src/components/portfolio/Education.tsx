@@ -9,19 +9,24 @@ export default function Education() {
       institution: "Amrita Vishwa Vidyapeetham",
       degree: "B.Tech in Computer Science and Engineering",
       duration: "2024 - 2028",
-      details: "Focus on AI, Data Structures, and Scalable Software Engineering. CGPA: 9.01"
+      details: "Focus on AI, Data Structures, and Scalable Software Engineering. CGPA: 9.01",
+      image: "/imgs/educations/Amrita Vishwa Vidyapeetham Logo Vector.svg .png"
     },
     {
       institution: "Prince Srivari Senior Secondary School",
       degree: "12th Grade (Bio-Math)",
       duration: "2023 - 2024",
-      details: "Percentage: 92%"
+      details: "Percentage: 92%",
+      image: "/imgs/educations/prince.png",
+      imageClass: "scale-[1.7]"
     },
     {
       institution: "Prince Srivari Senior Secondary School",
       degree: "10th Grade",
       duration: "2021 - 2022",
-      details: "Math, Physics, Chemistry, English, Social. Percentage: 88%"
+      details: "Math, Physics, Chemistry, English, Social. Percentage: 88%",
+      image: "/imgs/educations/prince.png",
+      imageClass: "scale-[1.7]"
     }
   ];
 
@@ -38,8 +43,8 @@ export default function Education() {
             key={index} 
             className="flex flex-col sm:flex-row sm:items-start gap-4 p-6 border border-zinc-200 dark:border-zinc-800 rounded-3xl bg-white dark:bg-zinc-900/50"
           >
-            <div className="w-12 h-12 rounded-full bg-indigo-50 dark:bg-indigo-500/10 flex-shrink-0 flex items-center justify-center border border-indigo-100 dark:border-indigo-900/30">
-              <GraduationCap className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+            <div className="w-12 h-12 rounded-full bg-indigo-50 dark:bg-indigo-500/10 flex-shrink-0 flex items-center justify-center border border-indigo-100 dark:border-indigo-900/30 overflow-hidden p-2">
+              <img src={edu.image} alt={edu.institution} className={`w-full h-full object-contain ${edu.imageClass || ""}`} />
             </div>
             <div>
               <h3 className="font-bold text-lg">{edu.institution}</h3>

@@ -8,19 +8,22 @@ const achievements = [
     title: "Approved Project - Assets Management System @ AAI",
     date: "May 2026",
     description: "Developed and successfully delivered a comprehensive asset tracking system.",
-    link: "https://github.com/Ganath-Avinash?tab=repositories"
+    link: "https://github.com/Ganath-Avinash?tab=repositories",
+    image: "/imgs/achievements/AAI.png"
   },
   {
     title: "Coding Ranking 1500+ @Leetcode",
     date: "Ongoing",
     description: "Solving DSA problems as soon as I learn a new topic to continuously improve my algorithmic skills.",
-    link: "https://leetcode.com/u/Ganath/"
+    link: "https://leetcode.com/u/Ganath/",
+    image: "/imgs/achievements/lc.png"
   },
   {
     title: "Top 6 in Code Auction @ AVV GFG",
     date: "Feb 2026",
     description: "Code Auction is an event where you bid for a problem then solve it. The highest one wins.",
-    link: "https://drive.google.com/file/d/19JxdkjhtNPhmMqdT_Y8A8iukxoOUJF2j/view?usp=drive_link"
+    link: "https://drive.google.com/file/d/19JxdkjhtNPhmMqdT_Y8A8iukxoOUJF2j/view?usp=drive_link",
+    image: "/imgs/achievements/gfg.png"
   }
 ];
 
@@ -38,8 +41,8 @@ export default function Achievements() {
             key={index} 
             className="flex flex-col sm:flex-row sm:items-center gap-4 p-6 border border-zinc-200 dark:border-zinc-800 rounded-3xl bg-white dark:bg-zinc-900/50"
           >
-            <div className="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-500/10 flex-shrink-0 flex items-center justify-center border border-blue-100 dark:border-blue-900/30">
-              <Award className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <div className="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-500/10 flex-shrink-0 flex items-center justify-center border border-blue-100 dark:border-blue-900/30 overflow-hidden p-2">
+              <img src={item.image} alt={item.title} className="w-full h-full object-contain" />
             </div>
             <div className="flex-grow">
               <h3 className="font-bold text-lg">{item.title}</h3>

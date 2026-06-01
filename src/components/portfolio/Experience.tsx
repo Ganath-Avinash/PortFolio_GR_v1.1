@@ -3,7 +3,7 @@ import SplitText from "../SplitText";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ExternalLink } from "lucide-react";
 
 const experiences = [
   {
@@ -15,7 +15,8 @@ const experiences = [
       "It's Simple, Minimalistic and Secure",
       "Got great reviews from IT head and final review has been cleared",
       "It will be soon be used in AAI IT Department"
-    ]
+    ],
+    proofLink: "https://drive.google.com/file/d/1I_cm8E_vcu_bvDEbnj-hxhdhAtAFm8hQ/view?usp=drive_link"
   },
   {
     role: "IEEE Member",
@@ -25,7 +26,8 @@ const experiences = [
       "Research about AI and Cys",
       "Learning from papers",
       "Trying to publish my own IEEE Standard Paper"
-    ]
+    ],
+    proofLink: "https://drive.google.com/file/d/1YWLkzK-bkyD_zSp1O3Tbli8VICXghLNI/view?usp=sharing"
   }
 ];
 
@@ -80,6 +82,19 @@ export default function Experience() {
                           <li key={i} className="text-sm leading-relaxed">{detail}</li>
                         ))}
                       </ul>
+                      {exp.proofLink && (
+                        <div className="mt-5">
+                          <a 
+                            href={exp.proofLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-full text-sm font-medium hover:scale-105 transition-transform shadow-sm"
+                          >
+                            Proof of Experience
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </motion.div>
                 )}

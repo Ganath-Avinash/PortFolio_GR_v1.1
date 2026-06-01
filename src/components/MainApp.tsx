@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Terminal from "./terminal/Terminal";
 import PortfolioGUI from "./portfolio/PortfolioGUI";
@@ -8,7 +8,20 @@ import PortfolioGUI from "./portfolio/PortfolioGUI";
 export type ViewMode = "terminal" | "transition" | "gui";
 
 export default function MainApp() {
-  const [viewMode, setViewMode] = useState<ViewMode>("terminal");
+  const [viewMode, setViewMode] = useState<ViewMode | "loading">("loading");
+
+  useEffect(() => {
+    const hasSkipped = sessionStorage.getItem("portfolio_cli_skipped");
+    if (hasSkipped) {
+      setViewMode("gui");
+    } else {
+      setViewMode("terminal");
+    }
+  }, []);
+
+  if (viewMode === "loading") {
+    return <div className="w-full min-h-screen bg-background" />;
+  }
 
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden bg-background text-foreground">
@@ -22,7 +35,10 @@ export default function MainApp() {
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="absolute inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
           >
-            <Terminal onLaunch={() => setViewMode("transition")} />
+            <Terminal onLaunch={() => {
+              sessionStorage.setItem("portfolio_cli_skipped", "true");
+              setViewMode("transition");
+            }} />
           </motion.div>
         )}
 

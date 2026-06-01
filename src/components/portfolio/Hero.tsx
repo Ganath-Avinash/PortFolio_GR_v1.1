@@ -1,10 +1,25 @@
 "use client";
 import SplitText from "../SplitText";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 import Lanyard from "../Lanyard";
 
 export default function Hero() {
+  const titles = [
+    "UG CSE @ AVV Chennai",
+    "Full Stack Developer",
+    "AI Engineer"
+  ];
+  const [titleIndex, setTitleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTitleIndex((prev) => (prev + 1) % titles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="home" className="min-h-[100vh] relative overflow-hidden flex items-center">
       
@@ -24,7 +39,20 @@ export default function Hero() {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-tight sm:whitespace-nowrap">
             Ganath Avinash <span className="text-zinc-500">G R</span>
           </h1>
-          <SplitText text="UG CSE - Full Stack Development & AI Integration" className="text-lg sm:text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 mb-10 leading-relaxed max-w-lg block" delay={50} duration={1.25} ease="power3.out" splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }} threshold={0.1} rootMargin="-50px" textAlign="inherit" tag="p" />
+          <div className="h-10 sm:h-12 md:h-14 mb-10 overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={titleIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="text-lg sm:text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-lg"
+              >
+                {titles[titleIndex]}
+              </motion.p>
+            </AnimatePresence>
+          </div>
           <div className="flex flex-col sm:flex-row items-start gap-4">
             <a
               href="#skills"

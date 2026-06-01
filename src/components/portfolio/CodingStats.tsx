@@ -4,7 +4,7 @@ import SplitText from "../SplitText";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { SiLeetcode, SiGeeksforgeeks, SiHackerrank } from "react-icons/si";
-import { FiAward, FiStar } from "react-icons/fi";
+import { FiAward, FiStar, FiExternalLink } from "react-icons/fi";
 
 type LeetcodeData = {
   totalSolved: number;
@@ -108,7 +108,12 @@ export default function CodingStats() {
                  <SiLeetcode className="w-8 h-8 text-orange-500" />
                </div>
                <div>
-                 <h4 className="font-bold text-xl">Leetcode</h4>
+                 <div className="flex items-center gap-2">
+                   <h4 className="font-bold text-xl">Leetcode</h4>
+                   <a href="https://leetcode.com/u/Ganath/" target="_blank" rel="noreferrer" className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg" aria-label="View Leetcode Profile">
+                     <FiExternalLink className="w-4 h-4 text-zinc-500" />
+                   </a>
+                 </div>
                  <p className="text-xs text-zinc-500">@Ganath</p>
                </div>
              </div>
@@ -137,7 +142,12 @@ export default function CodingStats() {
                <div className="bg-[#00EA64]/10 p-3 rounded-2xl border border-[#00EA64]/20 inline-block mb-4">
                  <SiHackerrank className="w-6 h-6 text-[#00EA64]" />
                </div>
-               <h4 className="font-bold text-lg">Hackerrank</h4>
+               <div className="flex items-center gap-2">
+                 <h4 className="font-bold text-lg">Hackerrank</h4>
+                 <a href="https://hackerrank.com/profile/ganathavinash_gr" target="_blank" rel="noreferrer" className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg" aria-label="View Hackerrank Profile">
+                   <FiExternalLink className="w-4 h-4 text-zinc-500" />
+                 </a>
+               </div>
                <p className="text-xs text-zinc-500">@Ganath Avinash</p>
             </div>
             <div className="text-right">
@@ -171,7 +181,12 @@ export default function CodingStats() {
              <div className="bg-green-50 dark:bg-green-900/20 p-3 rounded-2xl border border-green-100 dark:border-green-900/30 inline-block mb-4">
                <SiGeeksforgeeks className="w-6 h-6 text-green-600" />
              </div>
-             <h4 className="font-bold text-lg">GeeksForGeeks</h4>
+             <div className="flex items-center gap-2">
+               <h4 className="font-bold text-lg">GeeksForGeeks</h4>
+               <a href="https://www.geeksforgeeks.org/profile/ganathav07am" target="_blank" rel="noreferrer" className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg" aria-label="View GeeksForGeeks Profile">
+                 <FiExternalLink className="w-4 h-4 text-zinc-500" />
+               </a>
+             </div>
              <p className="text-xs text-zinc-500">@Ganath Avinash</p>
           </div>
           <div className="relative z-10 mt-8 text-right">

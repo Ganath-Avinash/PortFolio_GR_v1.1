@@ -5,11 +5,11 @@ import { motion } from "framer-motion";
 
 export default function Certifications() {
   const certs = [
-    { title: "Generative AI For Everyone", issuer: "DeepLearning.AI", year: "Mar 2026", icon: "🧠", link: "https://drive.google.com/file/d/1u6kJEGD8RNjl5RJQc0fkrGcLN3eBFzSZ/view?usp=drive_link" },
-    { title: "Meta - Full Stack Specialisation", issuer: "Meta", year: "Ongoing (1/10)", icon: "💻", link: "https://drive.google.com/drive/folders/1agfxKW_9oXmpmmlW1v_9UvoqxsP1GT9d?usp=drive_link" },
-    { title: "SQL Advanced", issuer: "HackerRank", year: "Apr 2026", icon: "📊", link: "https://drive.google.com/file/d/176H2h60c4qHKIjC-R7wgzevX9eCrM5Oy/view?usp=drive_link" },
-    { title: "Gemini Student & Educator Certification", issuer: "Google Gemini", year: "Feb 2026", icon: "✨", link: "https://drive.google.com/file/d/1k5ZNzXolFWTOM4WFcVIanCFuNHl4HQj9/view?usp=drive_link" },
-    { title: "RDBMS & DBMS Certification", issuer: "Udemy", year: "Oct 2025", icon: "💾", link: "https://drive.google.com/file/d/1mTdM-eaK9INzLpQxaE8wBUOmTJK5RDXo/view?usp=drive_link" },
+    { title: "Generative AI For Everyone", issuer: "DeepLearning.AI", year: "Mar 2026", image: "/imgs/certifications/deeplearn.jpeg", link: "https://drive.google.com/file/d/1u6kJEGD8RNjl5RJQc0fkrGcLN3eBFzSZ/view?usp=drive_link" },
+    { title: "Meta - Full Stack Specialisation", issuer: "Meta", year: "Ongoing (1/10)", image: "/imgs/certifications/meta.png", link: "https://drive.google.com/drive/folders/1agfxKW_9oXmpmmlW1v_9UvoqxsP1GT9d?usp=drive_link" },
+    { title: "SQL Advanced", issuer: "HackerRank", year: "Apr 2026", image: "/imgs/certifications/hackerrank.png", link: "https://drive.google.com/file/d/176H2h60c4qHKIjC-R7wgzevX9eCrM5Oy/view?usp=drive_link" },
+    { title: "Gemini Student & Educator Certification", issuer: "Google Gemini", year: "Feb 2026", image: "/imgs/certifications/gemini.png", link: "https://drive.google.com/file/d/1k5ZNzXolFWTOM4WFcVIanCFuNHl4HQj9/view?usp=drive_link" },
+    { title: "RDBMS & DBMS Certification", issuer: "Udemy", year: "Oct 2025", image: "/imgs/certifications/udemy.png", link: "https://drive.google.com/file/d/1mTdM-eaK9INzLpQxaE8wBUOmTJK5RDXo/view?usp=drive_link" },
   ];
 
   return (
@@ -29,8 +29,8 @@ export default function Certifications() {
             className="p-6 border border-zinc-200 dark:border-zinc-800 rounded-3xl bg-white dark:bg-zinc-900/50 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 hover:shadow-sm transition-all"
           >
             <div className="flex items-center gap-4 sm:gap-6 flex-grow">
-              <div className="w-16 h-16 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-[1.2rem] flex items-center justify-center text-3xl shadow-sm shrink-0">
-                {cert.icon}
+              <div className="w-16 h-16 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-[1.2rem] flex items-center justify-center text-3xl shadow-sm shrink-0 overflow-hidden p-2.5">
+                <img src={cert.image} alt={cert.issuer} className="w-full h-full object-contain" />
               </div>
               <div className="flex flex-col items-start pt-1">
                 <h3 className="font-bold text-[1.1rem] text-zinc-900 dark:text-white mb-1 leading-none">{cert.title}</h3>
