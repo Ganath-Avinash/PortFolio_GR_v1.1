@@ -30,7 +30,7 @@ export default function Terminal({ onLaunch }: TerminalProps) {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [welcomeLogs, setWelcomeLogs] = useState<LogEntry[]>([]);
   
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { setTheme, theme } = useTheme();
 
@@ -44,8 +44,12 @@ export default function Terminal({ onLaunch }: TerminalProps) {
   }, []);
 
   useEffect(() => {
-    // Scroll to bottom whenever logs change
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        top: containerRef.current.scrollHeight,
+        behavior: "smooth"
+      });
+    }
   }, [logs, welcomeLogs]);
 
   useEffect(() => {
@@ -70,7 +74,7 @@ export default function Terminal({ onLaunch }: TerminalProps) {
                   <div className="mt-8 mb-4 space-y-1">
                     <p>Welcome to the Ganath Avinash's Portfolio</p>
                     <p>Type "help" to begin.</p>
-                    <p className="mt-2 text-blue-400">To launch the portfolio interface:</p>
+                    <p className="mt-2 text-blue-400">To launch the graphical portfolio interface enter:</p>
                     <p className="text-blue-400 font-bold">gui</p>
                   </div>
                 ),
@@ -140,7 +144,6 @@ export default function Terminal({ onLaunch }: TerminalProps) {
               <span className="text-blue-400">about</span><span>About Ganath Avinash G R</span>
               <span className="text-blue-400">skills</span><span>List technical skills</span>
               <span className="text-blue-400">projects</span><span>View featured projects</span>
-              <span className="text-blue-400">theme</span><span>Toggle light/dark theme</span>
               <span className="text-blue-400">clear</span><span>Clear the terminal output</span>
               <span className="text-green-400 font-bold">gui</span><span>Launch visual portfolio interface</span>
             </div>
@@ -176,19 +179,16 @@ export default function Terminal({ onLaunch }: TerminalProps) {
           <div className="space-y-2">
             <p>Featured Projects:</p>
             <div className="pl-4 border-l-2 border-zinc-800 space-y-2 text-zinc-300">
-              <p>- Facial Emotion Recognition</p>
-              <p>- AI Interview Assistant</p>
-              <p>- Smart Attendance System</p>
-              <p>- Full Stack SaaS Platform</p>
-              <p className="text-blue-400 italic">Type 'gui' to see detailed project cards.</p>
+              <p>- AAI - Assets Management <span className="text-zinc-500">(Web-based IT asset tracking)</span></p>
+              <p>- RAG Triage <span className="text-zinc-500">(AI support ticket management)</span></p>
+              <p>- TrafficSense <span className="text-zinc-500">(Emissions analytics & forecasting)</span></p>
+              <p>- Wits & Bytes <span className="text-zinc-500">(Stock image discovery platform)</span></p>
+              <p>- Portfolio v1.1 <span className="text-zinc-500">(Interactive portfolio interface)</span></p>
+              <p>- Javascript Games <span className="text-zinc-500">(Browser-based logic games)</span></p>
+              <p className="text-blue-400 italic pt-2">Type 'gui' to see detailed project cards.</p>
             </div>
           </div>
         );
-        break;
-      case "theme":
-        const newTheme = theme === "dark" ? "light" : "dark";
-        setTheme(newTheme);
-        output = `Theme switched to ${newTheme} mode.`;
         break;
       case "clear":
         setLogs([]); // Only clears the commands, not the welcome boot sequence
@@ -225,7 +225,10 @@ export default function Terminal({ onLaunch }: TerminalProps) {
       </div>
 
       {/* Terminal Content */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6 selection:bg-blue-500/30 selection:text-white">
+      <div 
+        ref={containerRef}
+        className="flex-1 overflow-y-auto p-4 sm:p-6 selection:bg-blue-500/30 selection:text-white"
+      >
         <div className="flex flex-col space-y-2">
           {/* Boot sequence always stays visible */}
           {welcomeLogs.map((log) => (
@@ -258,7 +261,6 @@ export default function Terminal({ onLaunch }: TerminalProps) {
               />
             </div>
           )}
-          <div ref={bottomRef} className="h-4" />
         </div>
       </div>
     </div>

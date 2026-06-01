@@ -99,39 +99,44 @@ const SplitText: React.FC<SplitTextProps> = ({
         linesClass: 'split-line',
         wordsClass: 'split-word',
         charsClass: 'split-char',
-        reduceWhiteSpace: false,
-        onSplit: (self: GSAPSplitText) => {
-          assignTargets(self);
-          return gsap.fromTo(
-            targets,
-            { ...from },
-            {
-              ...to,
-              duration,
-              ease,
-              stagger: delay / 1000,
-              scrollTrigger: {
-                trigger: el,
-                start,
-                once: true,
-                fastScrollEnd: true,
-                anticipatePin: 0.4
-              },
-              onComplete: () => {
-                animationCompletedRef.current = true;
-                onCompleteRef.current?.();
-              },
-              willChange: 'transform, opacity',
-              force3D: true
-            }
-          );
-        }
+        reduceWhiteSpace: false
       });
+      
+      assignTargets(splitInstance);
+      
+      const tween = gsap.fromTo(
+        targets,
+        { ...from },
+        {
+          ...to,
+          duration,
+          ease,
+          stagger: delay / 1000,
+          paused: true,
+          onComplete: () => {
+            animationCompletedRef.current = true;
+            onCompleteRef.current?.();
+          },
+          willChange: 'transform, opacity',
+          force3D: true
+        }
+      );
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            tween.play();
+            observer.disconnect();
+          }
+        },
+        { threshold, rootMargin }
+      );
+      
+      observer.observe(el);
+      
       el._rbsplitInstance = splitInstance;
       return () => {
-        ScrollTrigger.getAll().forEach(st => {
-          if (st.trigger === el) st.kill();
-        });
+        observer.disconnect();
         try {
           splitInstance.revert();
         } catch (_) {}

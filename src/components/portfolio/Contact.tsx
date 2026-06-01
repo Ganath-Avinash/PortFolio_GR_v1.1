@@ -2,7 +2,8 @@
 import SplitText from "../SplitText";
 
 import { motion } from "framer-motion";
-import { Mail } from "lucide-react";
+import { Mail, CheckCircle2, XCircle } from "lucide-react";
+import { useState } from "react";
 
 function GithubIcon() {
   return (
@@ -23,6 +24,44 @@ function LinkedinIcon() {
 }
 
 export default function Contact() {
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("submitting");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      role: formData.get("role"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        const errData = await res.json().catch(() => null);
+        console.error("API Error Details:", errData);
+        setStatus("error");
+        alert(`Error: ${errData?.details || "Failed to send email. Check console."}`);
+      }
+    } catch (error) {
+      console.error("Fetch Error:", error);
+      setStatus("error");
+    }
+  };
+
   return (
     <section id="contact" className="py-24 px-6 bg-zinc-50 dark:bg-zinc-900/50">
       <div className="max-w-7xl mx-auto">
@@ -41,35 +80,58 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="bg-white dark:bg-zinc-900 p-8 rounded-3xl shadow-sm border border-zinc-200 dark:border-zinc-800 text-left space-y-6"
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmit}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label htmlFor="name" className="text-sm font-medium">Name</label>
-              <input id="name" type="text" className="w-full p-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all" placeholder="John Doe" />
+              <input id="name" name="name" type="text" required className="w-full p-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all disabled:opacity-50" placeholder="John Doe" disabled={status === "submitting"} />
             </div>
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-medium">Email</label>
-              <input id="email" type="email" className="w-full p-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all" placeholder="john@example.com" />
+              <input id="email" name="email" type="email" required className="w-full p-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all disabled:opacity-50" placeholder="john@example.com" disabled={status === "submitting"} />
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label htmlFor="role" className="text-sm font-medium">Role</label>
-              <input id="role" type="text" className="w-full p-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all" placeholder="e.g. Recruiter, Founder" />
+              <input id="role" name="role" type="text" className="w-full p-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all disabled:opacity-50" placeholder="e.g. Recruiter, Founder" disabled={status === "submitting"} />
             </div>
             <div className="space-y-2">
               <label htmlFor="subject" className="text-sm font-medium">Subject</label>
-              <input id="subject" type="text" className="w-full p-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all" placeholder="Opportunity" />
+              <input id="subject" name="subject" type="text" className="w-full p-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all disabled:opacity-50" placeholder="Opportunity" disabled={status === "submitting"} />
             </div>
           </div>
           <div className="space-y-2">
             <label htmlFor="message" className="text-sm font-medium">Message</label>
-            <textarea id="message" rows={4} className="w-full p-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all" placeholder="Your message here..." />
+            <textarea id="message" name="message" required rows={4} className="w-full p-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-transparent focus:ring-2 focus:ring-black dark:focus:ring-white outline-none transition-all disabled:opacity-50" placeholder="Your message here..." disabled={status === "submitting"} />
           </div>
+          
+          {status === "success" && (
+            <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-900 rounded-xl flex items-center gap-3 text-green-700 dark:text-green-400">
+              <CheckCircle2 className="w-5 h-5 shrink-0" />
+              <p className="text-sm font-medium">Message sent successfully! I'll get back to you soon.</p>
+            </div>
+          )}
+          
+          {status === "error" && (
+            <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900 rounded-xl flex items-center gap-3 text-red-700 dark:text-red-400">
+              <XCircle className="w-5 h-5 shrink-0" />
+              <p className="text-sm font-medium">Failed to send message. Please try again or email me directly.</p>
+            </div>
+          )}
+
           <div className="space-y-3 pt-2">
-            <button type="submit" className="w-full py-4 bg-black dark:bg-white text-white dark:text-black rounded-xl font-bold hover:scale-[1.02] transition-transform">
-              Send Message
+            <button type="submit" disabled={status === "submitting"} className="w-full py-4 bg-black dark:bg-white text-white dark:text-black rounded-xl font-bold hover:scale-[1.02] transition-transform disabled:opacity-70 disabled:hover:scale-100 flex items-center justify-center gap-2">
+              {status === "submitting" ? (
+                <>
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white dark:text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Sending...
+                </>
+              ) : "Send Message"}
             </button>
             <p className="text-center text-xs text-zinc-500 font-medium tracking-wide">
               Expected reply time &lt; 24 hrs

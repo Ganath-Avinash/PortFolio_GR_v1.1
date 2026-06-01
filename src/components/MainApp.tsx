@@ -4,6 +4,10 @@ import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Terminal from "./terminal/Terminal";
 import PortfolioGUI from "./portfolio/PortfolioGUI";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export type ViewMode = "terminal" | "transition" | "gui";
 
@@ -19,12 +23,36 @@ export default function MainApp() {
     }
   }, []);
 
+  useEffect(() => {
+    if (viewMode === "gui") {
+      // Force GSAP ScrollTrigger to recalculate positions after layout expands
+      // We must call it explicitly because window dimensions don't technically change
+      setTimeout(() => {
+        ScrollTrigger.refresh(true);
+      }, 100);
+      setTimeout(() => {
+        ScrollTrigger.refresh(true);
+      }, 500);
+    }
+  }, [viewMode]);
+
   if (viewMode === "loading") {
     return <div className="w-full min-h-screen bg-background" />;
   }
 
   return (
-    <div className="relative w-full min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div className={`relative w-full min-h-screen overflow-x-hidden bg-background text-foreground ${viewMode !== 'gui' ? 'h-screen overflow-hidden' : ''}`}>
+      {/* Pre-mount GUI in background to prevent 3D initialization lag */}
+      <div 
+        className={`${viewMode === 'gui' ? 'relative' : 'absolute inset-0'} z-10 w-full min-h-screen bg-white dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 transition-opacity duration-1000 ease-out`}
+        style={{
+          opacity: viewMode === "gui" ? 1 : 0,
+          pointerEvents: viewMode === "gui" ? "auto" : "none"
+        }}
+      >
+        <PortfolioGUI />
+      </div>
+
       <AnimatePresence mode="wait">
         {viewMode === "terminal" && (
           <motion.div
@@ -65,18 +93,6 @@ export default function MainApp() {
                 Initializing Interface
               </p>
             </motion.div>
-          </motion.div>
-        )}
-
-        {viewMode === "gui" && (
-          <motion.div
-            key="gui"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="relative z-10 w-full min-h-screen bg-white dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50"
-          >
-            <PortfolioGUI />
           </motion.div>
         )}
       </AnimatePresence>
