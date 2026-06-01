@@ -9,7 +9,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ganath Avinash G R | Professional Portfolio",
+  title: "Ganath Avinash G R | Official",
   description: "UG CSE - Full Stack & AI Integration",
 };
 

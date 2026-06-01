@@ -58,15 +58,17 @@ export default function GithubFootprint() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="col-span-1 lg:col-span-3 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-8 bg-white dark:bg-zinc-900 shadow-sm flex items-center justify-center overflow-x-auto"
+          className="col-span-1 lg:col-span-3 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-4 md:p-8 bg-white dark:bg-zinc-900 shadow-sm w-full flex items-center justify-center overflow-hidden"
         >
-          <div className="min-w-[700px] flex justify-center">
+          <div className="w-full max-w-full">
             <GitHubCalendar 
               username="Ganath-Avinash"
               colorScheme={theme === "dark" ? "dark" : "light"}
               fontSize={14}
               blockSize={14}
-              blockMargin={6}
+              blockMargin={5}
+              hideTotalCount={true}
+              hideColorLegend={true}
             />
           </div>
         </motion.div>
