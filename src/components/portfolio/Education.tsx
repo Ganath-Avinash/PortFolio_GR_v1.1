@@ -2,6 +2,7 @@
 import SplitText from "../SplitText";
 
 import { GraduationCap } from "lucide-react";
+import Image from "next/image";
 
 export default function Education() {
   const education = [
@@ -43,8 +44,8 @@ export default function Education() {
             key={index} 
             className="flex flex-col sm:flex-row sm:items-start gap-4 p-6 border border-zinc-200 dark:border-zinc-800 rounded-3xl bg-white dark:bg-zinc-900/50"
           >
-            <div className="w-12 h-12 rounded-full bg-indigo-50 dark:bg-indigo-500/10 flex-shrink-0 flex items-center justify-center border border-indigo-100 dark:border-indigo-900/30 overflow-hidden p-2">
-              <img src={edu.image} alt={edu.institution} className={`w-full h-full object-contain ${edu.imageClass || ""}`} />
+            <div className="w-12 h-12 rounded-full bg-indigo-50 dark:bg-indigo-500/10 flex-shrink-0 flex items-center justify-center border border-indigo-100 dark:border-indigo-900/30 overflow-hidden relative">
+              <Image src={edu.image} alt={edu.institution} fill className={`object-contain p-2 ${edu.imageClass || ""}`} sizes="48px" />
             </div>
             <div>
               <h3 className="font-bold text-lg">{edu.institution}</h3>

@@ -2,6 +2,7 @@
 import SplitText from "../SplitText";
 
 import { Award } from "lucide-react";
+import Image from "next/image";
 
 const achievements = [
   {
@@ -41,8 +42,8 @@ export default function Achievements() {
             key={index} 
             className="flex flex-col sm:flex-row sm:items-center gap-4 p-6 border border-zinc-200 dark:border-zinc-800 rounded-3xl bg-white dark:bg-zinc-900/50"
           >
-            <div className="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-500/10 flex-shrink-0 flex items-center justify-center border border-blue-100 dark:border-blue-900/30 overflow-hidden p-2">
-              <img src={item.image} alt={item.title} className="w-full h-full object-contain" />
+            <div className="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-500/10 flex-shrink-0 flex items-center justify-center border border-blue-100 dark:border-blue-900/30 overflow-hidden relative">
+              <Image src={item.image} alt={item.title} fill className="object-contain p-2" sizes="48px" />
             </div>
             <div className="flex-grow">
               <h3 className="font-bold text-lg">{item.title}</h3>

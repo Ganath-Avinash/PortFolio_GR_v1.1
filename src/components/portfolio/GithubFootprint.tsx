@@ -58,6 +58,7 @@ export default function GithubFootprint() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
+          style={{ willChange: "transform, opacity" }}
           className="col-span-1 lg:col-span-3 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-4 md:p-8 bg-white dark:bg-zinc-900 shadow-sm w-full flex items-center justify-center overflow-hidden"
         >
           <div className="w-full max-w-full [&>article>div:last-child]:hidden">

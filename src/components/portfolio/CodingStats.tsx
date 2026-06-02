@@ -75,6 +75,7 @@ export default function CodingStats() {
         <motion.div 
           variants={itemVariants}
           whileHover={{ y: -5, scale: 1.02 }}
+          style={{ willChange: "transform, opacity" }}
           className="md:row-span-2 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-8 flex flex-col justify-between bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-900 dark:to-zinc-900/80 shadow-sm"
         >
           <div>
@@ -97,6 +98,7 @@ export default function CodingStats() {
         <motion.div 
           variants={itemVariants}
           whileHover={{ y: -5, scale: 1.02 }}
+          style={{ willChange: "transform, opacity" }}
           className="md:col-span-2 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-8 bg-white dark:bg-zinc-900 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center relative overflow-hidden group"
         >
           <div className="absolute -right-10 -bottom-10 opacity-5 group-hover:opacity-10 transition-opacity">
@@ -135,6 +137,7 @@ export default function CodingStats() {
         <motion.div 
           variants={itemVariants}
           whileHover={{ y: -5, scale: 1.02 }}
+          style={{ willChange: "transform, opacity" }}
           className="border border-zinc-200 dark:border-zinc-800 rounded-3xl p-8 bg-white dark:bg-zinc-900 shadow-sm flex flex-col justify-between group"
         >
           <div className="flex justify-between items-start mb-6">
@@ -172,6 +175,7 @@ export default function CodingStats() {
         <motion.div 
           variants={itemVariants}
           whileHover={{ y: -5, scale: 1.02 }}
+          style={{ willChange: "transform, opacity" }}
           className="border border-zinc-200 dark:border-zinc-800 rounded-3xl p-8 bg-white dark:bg-zinc-900 shadow-sm flex flex-col justify-between relative overflow-hidden group"
         >
           <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">

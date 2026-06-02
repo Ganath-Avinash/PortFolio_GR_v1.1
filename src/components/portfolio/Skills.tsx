@@ -43,6 +43,7 @@ export default function Skills() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          style={{ willChange: "transform, opacity" }}
           className="flex flex-col gap-6 lg:gap-8"
         >
           <SkillCard 
@@ -72,6 +73,7 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
+          style={{ willChange: "transform, opacity" }}
           className="flex flex-col gap-6 lg:gap-8"
         >
           <SkillCard 
@@ -106,6 +108,7 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
+          style={{ willChange: "transform, opacity" }}
           className="flex flex-col gap-6 lg:gap-8"
         >
           <SkillCard 

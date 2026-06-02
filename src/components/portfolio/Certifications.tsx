@@ -2,6 +2,7 @@
 import SplitText from "../SplitText";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Certifications() {
   const certs = [
@@ -26,11 +27,12 @@ export default function Certifications() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: idx * 0.1 }}
+            style={{ willChange: "transform, opacity" }}
             className="p-6 border border-zinc-200 dark:border-zinc-800 rounded-3xl bg-white dark:bg-zinc-900/50 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 hover:shadow-sm transition-all"
           >
             <div className="flex items-center gap-4 sm:gap-6 flex-grow">
-              <div className="w-16 h-16 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-[1.2rem] flex items-center justify-center text-3xl shadow-sm shrink-0 overflow-hidden p-2.5">
-                <img src={cert.image} alt={cert.issuer} className="w-full h-full object-contain" />
+              <div className="w-16 h-16 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-[1.2rem] flex items-center justify-center text-3xl shadow-sm shrink-0 overflow-hidden relative">
+                <Image src={cert.image} alt={cert.issuer} fill className="object-contain p-2.5" sizes="64px" />
               </div>
               <div className="flex flex-col items-start pt-1">
                 <h3 className="font-bold text-[1.1rem] text-zinc-900 dark:text-white mb-1 leading-none">{cert.title}</h3>

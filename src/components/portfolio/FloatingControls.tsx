@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 export default function FloatingControls() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -17,15 +18,34 @@ export default function FloatingControls() {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
       <button
-        className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all hover:scale-110 active:scale-95"
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors hover:scale-110 active:scale-95 overflow-hidden"
+        onClick={() => {
+          const newTheme = theme === "dark" ? "light" : "dark";
+          if (!document.startViewTransition) {
+            setTheme(newTheme);
+          } else {
+            document.startViewTransition(() => {
+              setTheme(newTheme);
+            });
+          }
+        }}
         aria-label="Toggle Theme"
       >
         {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
       </button>
 
-      <div className="relative group">
-        <div className="absolute bottom-full right-0 mb-3 flex flex-col gap-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+      <div 
+        className="relative group"
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+      >
+        <div 
+          className={`absolute bottom-full right-0 mb-3 flex flex-col gap-2 transition-all duration-300 ${
+            isOpen 
+              ? "opacity-100 visible translate-y-0" 
+              : "opacity-0 invisible translate-y-2"
+          }`}
+        >
           <a
             href="https://drive.google.com/file/d/151GO-3b-RRosGO6flJ6bRAM3SZrK3yTf/view?usp=sharing"
             target="_blank"
@@ -45,7 +65,10 @@ export default function FloatingControls() {
           </a>
         </div>
         
-        <div className="w-12 h-12 rounded-full bg-black dark:bg-white text-white dark:text-black shadow-xl flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
+        <div 
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-12 h-12 rounded-full bg-black dark:bg-white text-white dark:text-black shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform cursor-pointer"
+        >
           <span className="font-bold text-xl">R</span>
         </div>
       </div>

@@ -3,7 +3,7 @@ import SplitText from "../SplitText";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import Lanyard from "../Lanyard";
+import ProfileCard from "../ProfileCard";
 
 export default function Hero() {
   const titles = [
@@ -23,12 +23,7 @@ export default function Hero() {
   return (
     <section id="home" className="min-h-[100vh] relative overflow-hidden flex items-center">
       
-      {/* Lanyard Animation Container: Full screen canvas to prevent clipping or stretching. Card offset is now handled in 3D space. */}
-      <div className="absolute inset-0 z-0 cursor-grab active:cursor-grabbing block">
-        <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
-      </div>
-
-      <div className="max-w-7xl mx-auto w-full px-6 pt-20 grid lg:grid-cols-2 gap-12 items-center relative z-10 pointer-events-none">
+      <div className="max-w-7xl mx-auto w-full px-6 py-20 lg:pt-32 grid lg:grid-cols-2 gap-12 lg:gap-8 items-center relative z-10 pointer-events-none">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -67,6 +62,36 @@ export default function Hero() {
               Coding Stats
             </a>
           </div>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="flex items-center justify-center lg:justify-end pointer-events-auto w-full relative z-20"
+        >
+          <ProfileCard
+            name="Ganath Avinash G R"
+            title="Software Engineer"
+            handle="Ganath-Avinash"
+            status="Online"
+            contactText="Contact Me"
+            avatarUrl="/imgs/titlecard/b&w.jpg"
+            miniAvatarUrl="/imgs/titlecard/b&w.jpg"
+            iconUrl="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTM1IDQwTDE1IDYwbDIwIDIwbTUwLTQwbDIwIDIwLTIwIDIwTTY1IDMwTDU1IDkwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjYiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz4KPC9zdmc+"
+            showUserInfo={true}
+            enableTilt={true}
+            enableMobileTilt={true}
+            onContactClick={() => {
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            behindGlowColor="rgba(125, 190, 255, 0.67)"
+            behindGlowEnabled={true}
+            innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
+          />
         </motion.div>
       </div>
     </section>

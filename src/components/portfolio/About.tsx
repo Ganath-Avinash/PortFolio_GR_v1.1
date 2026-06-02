@@ -42,6 +42,7 @@ function TerminalAbout() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       onViewportEnter={() => setStarted(true)}
+      style={{ willChange: "transform, opacity" }}
       className="w-full rounded-2xl overflow-hidden bg-[#1e1e1e] border border-zinc-800 shadow-2xl font-mono text-sm sm:text-base"
     >
       {/* Mac Window Header */}
@@ -76,6 +77,7 @@ export default function About() {
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
+          style={{ willChange: "transform, opacity" }}
         >
           <SplitText
             text="Hello, World"
