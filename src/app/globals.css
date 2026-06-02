@@ -129,29 +129,3 @@
     @apply font-sans overflow-x-hidden;
   }
 }
-
-/* 120fps Top-to-Bottom Wipe View Transition */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-  display: block;
-}
-
-::view-transition-old(root) {
-  z-index: 1;
-}
-
-::view-transition-new(root) {
-  z-index: 2;
-  animation: theme-wipe-down 0.7s cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-@keyframes theme-wipe-down {
-  0% {
-    clip-path: inset(0 0 100% 0);
-  }
-  100% {
-    clip-path: inset(0 0 0 0);
-  }
-}

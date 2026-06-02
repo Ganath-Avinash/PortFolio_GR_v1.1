@@ -4,6 +4,7 @@ import './ProfileCard.css';
 
 interface ProfileCardProps {
   avatarUrl: string;
+  coloredAvatarUrl?: string;
   iconUrl?: string;
   grainUrl?: string;
   innerGradient?: string;
@@ -39,8 +40,9 @@ const round = (v: number, precision = 3): number => parseFloat(v.toFixed(precisi
 const adjust = (v: number, fMin: number, fMax: number, tMin: number, tMax: number): number =>
   round(tMin + ((tMax - tMin) * (v - fMin)) / (fMax - fMin));
 
-const ProfileCardComponent: React.FC<ProfileCardProps> = ({
+export default function ProfileCard({
   avatarUrl = '',
+  coloredAvatarUrl,
   iconUrl,
   grainUrl,
   innerGradient,
@@ -59,7 +61,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   contactText = 'Contact Me',
   showUserInfo = true,
   onContactClick
-}) => {
+}: ProfileCardProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
 
@@ -333,15 +335,31 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     <div ref={wrapRef} className={`pc-card-wrapper ${className}`.trim()} style={cardStyle}>
       {behindGlowEnabled && <div className="pc-behind" />}
       <div ref={shellRef} className="pc-card-shell">
-        <section className="pc-card">
-          <div className="pc-inside">
+        <div className="pc-card">
+          <div className="pc-bg-layer">
+            <div className="pc-inside" />
             <div className="pc-shine" />
             <div className="pc-glare" />
-            <div className="pc-content pc-avatar-content">
+          </div>
+          
+          <div className="pc-content pc-avatar-content">
+            <Image
+              className="avatar"
+              src={avatarUrl}
+              alt={`${name || 'User'} avatar`}
+              width={600}
+              height={800}
+              priority
+              onError={e => {
+                const t = e.target as HTMLImageElement;
+                t.style.display = 'none';
+              }}
+            />
+            {coloredAvatarUrl && (
               <Image
-                className="avatar"
-                src={avatarUrl}
-                alt={`${name || 'User'} avatar`}
+                className="avatar avatar-colored"
+                src={coloredAvatarUrl}
+                alt={`${name || 'User'} colored avatar`}
                 width={600}
                 height={800}
                 priority
@@ -350,26 +368,26 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                   t.style.display = 'none';
                 }}
               />
-              {showUserInfo && (
-                <div className="pc-user-info" style={{ justifyContent: 'center', background: 'transparent', border: 'none', backdropFilter: 'none' }}>
-                  <button
-                    className="pc-contact-btn"
-                    onClick={handleContactClick}
-                    style={{ pointerEvents: 'auto', padding: '12px 32px', fontSize: '15px', background: 'rgba(255, 255, 255, 0.1)', border: '1px solid rgba(255, 255, 255, 0.2)' }}
-                    type="button"
-                    aria-label={`Contact ${name || 'user'}`}
-                  >
-                    {contactText}
-                  </button>
-                </div>
-              )}
-            </div>
+            )}
           </div>
-        </section>
+
+          {showUserInfo && (
+            <div className="pc-user-info" style={{ justifyContent: 'center', background: 'transparent', border: 'none', backdropFilter: 'none' }}>
+              <button
+                className="pc-contact-btn"
+                onClick={handleContactClick}
+                type="button"
+                aria-label={`Contact ${name || 'user'}`}
+              >
+                <span className="default-text">{contactText}</span>
+                <span className="terminal-text">&gt; connect_now()</span>
+              </button>
+            </div>
+          )}
+
+          <div className="pc-border-glow" />
+        </div>
       </div>
     </div>
   );
-};
-
-const ProfileCard = React.memo(ProfileCardComponent);
-export default ProfileCard;
+}

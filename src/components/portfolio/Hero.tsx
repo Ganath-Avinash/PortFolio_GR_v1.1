@@ -77,8 +77,9 @@ export default function Hero() {
             status="Online"
             contactText="Contact Me"
             avatarUrl="/imgs/titlecard/b&w.jpg"
+            coloredAvatarUrl="/imgs/titlecard/pfp.jpeg"
             miniAvatarUrl="/imgs/titlecard/b&w.jpg"
-            iconUrl="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTM1IDQwTDE1IDYwbDIwIDIwbTUwLTQwbDIwIDIwLTIwIDIwTTY1IDMwTDU1IDkwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjYiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz4KPC9zdmc+"
+            iconUrl="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyNSAxMzBMMTA1IDE1MGwyMCAyMG01MC00MGwyMCAyMC0yMCAyME0xNTUgMTIwTDE0NSAxODAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPg=="
             showUserInfo={true}
             enableTilt={true}
             enableMobileTilt={true}

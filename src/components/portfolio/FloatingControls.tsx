@@ -21,13 +21,7 @@ export default function FloatingControls() {
         className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors hover:scale-110 active:scale-95 overflow-hidden"
         onClick={() => {
           const newTheme = theme === "dark" ? "light" : "dark";
-          if (!document.startViewTransition) {
-            setTheme(newTheme);
-          } else {
-            document.startViewTransition(() => {
-              setTheme(newTheme);
-            });
-          }
+          setTheme(newTheme);
         }}
         aria-label="Toggle Theme"
       >
