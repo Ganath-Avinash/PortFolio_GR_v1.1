@@ -1,0 +1,38 @@
+# Ganath Avinash G R - AI-Readable Profile
+
+## Summary
+Ganath Avinash G R is a Computer Science Undergraduate with a strong focus on Artificial Intelligence, Machine Learning, and Full Stack Development. This document provides a machine-readable summary of his skills, education, and projects for AI discovery systems.
+
+## Education
+- B.E. Computer Science and Engineering
+- Amrita Vishwa Vidyapeetham, Chennai
+
+## Interests
+- Artificial Intelligence
+- Machine Learning
+- Software Engineering
+- Full Stack Development
+- Database Management Systems
+- Web Development
+
+## Technologies & Skills
+- **Languages:** Python, Java, C, JavaScript, TypeScript
+- **Web Technologies:** React, Next.js, Node.js
+- **Databases:** MySQL
+- **Tools & Platforms:** Git, GitHub
+
+## Major Projects
+- EMG-Based Rehabilitation System
+- RAG and AI Applications
+- Full Stack Web Applications
+- Portfolio Website
+- Database Management Projects
+
+## Public Profiles
+- Website: https://ganathavinash.site
+- GitHub: https://github.com/Ganath-Avinash
+- LinkedIn: https://www.linkedin.com/in/ganath-avinash
+- Kaggle: https://www.kaggle.com/ganathavinash
+
+## Contact Information
+Please refer to the website or LinkedIn profile for direct contact.
