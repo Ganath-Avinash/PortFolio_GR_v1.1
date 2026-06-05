@@ -1,391 +1,81 @@
-import React, { useEffect, useRef, useCallback, useMemo } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import './ProfileCard.css';
 
 interface ProfileCardProps {
-  avatarUrl: string;
+  avatarUrl?: string;
   coloredAvatarUrl?: string;
-  iconUrl?: string;
-  grainUrl?: string;
-  innerGradient?: string;
-  behindGlowEnabled?: boolean;
-  behindGlowColor?: string;
-  behindGlowSize?: string;
-  className?: string;
-  enableTilt?: boolean;
-  enableMobileTilt?: boolean;
-  mobileTiltSensitivity?: number;
-  miniAvatarUrl?: string;
   name?: string;
   title?: string;
-  handle?: string;
-  status?: string;
   contactText?: string;
-  showUserInfo?: boolean;
   onContactClick?: () => void;
+  className?: string;
 }
-
-const DEFAULT_INNER_GRADIENT = 'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)';
-
-const ANIMATION_CONFIG = {
-  INITIAL_DURATION: 1200,
-  INITIAL_X_OFFSET: 70,
-  INITIAL_Y_OFFSET: 60,
-  DEVICE_BETA_OFFSET: 20,
-  ENTER_TRANSITION_MS: 180
-} as const;
-
-const clamp = (v: number, min = 0, max = 100): number => Math.min(Math.max(v, min), max);
-const round = (v: number, precision = 3): number => parseFloat(v.toFixed(precision));
-const adjust = (v: number, fMin: number, fMax: number, tMin: number, tMax: number): number =>
-  round(tMin + ((tMax - tMin) * (v - fMin)) / (fMax - fMin));
 
 export default function ProfileCard({
   avatarUrl = '',
   coloredAvatarUrl,
-  iconUrl,
-  grainUrl,
-  innerGradient,
-  behindGlowEnabled = true,
-  behindGlowColor,
-  behindGlowSize,
-  className = '',
-  enableTilt = true,
-  enableMobileTilt = false,
-  mobileTiltSensitivity = 5,
-  miniAvatarUrl,
-  name = 'Ganath Avinash G R',
-  title = 'Software Engineer',
-  handle = 'Ganath-Avinash',
-  status = 'Online',
-  contactText = 'Contact Me',
-  showUserInfo = true,
-  onContactClick
+  name = 'Sophie Bennett',
+  title = 'Product Designer who focuses on simplicity & usability.',
+  contactText = 'Follow +',
+  onContactClick,
+  className = ''
 }: ProfileCardProps) {
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const shellRef = useRef<HTMLDivElement>(null);
-
-  const enterTimerRef = useRef<number | null>(null);
-  const leaveRafRef = useRef<number | null>(null);
-
-  const tiltEngine = useMemo(() => {
-    if (!enableTilt) return null;
-
-    let rafId: number | null = null;
-    let running = false;
-    let lastTs = 0;
-
-    let currentX = 0;
-    let currentY = 0;
-    let targetX = 0;
-    let targetY = 0;
-
-    const DEFAULT_TAU = 0.14;
-    const INITIAL_TAU = 0.6;
-    let initialUntil = 0;
-
-    const setVarsFromXY = (x: number, y: number) => {
-      const shell = shellRef.current;
-      const wrap = wrapRef.current;
-      if (!shell || !wrap) return;
-
-      const width = shell.clientWidth || 1;
-      const height = shell.clientHeight || 1;
-
-      const percentX = clamp((100 / width) * x);
-      const percentY = clamp((100 / height) * y);
-
-      const centerX = percentX - 50;
-      const centerY = percentY - 50;
-
-      const properties = {
-        '--pointer-x': `${percentX}%`,
-        '--pointer-y': `${percentY}%`,
-        '--background-x': `${adjust(percentX, 0, 100, 35, 65)}%`,
-        '--background-y': `${adjust(percentY, 0, 100, 35, 65)}%`,
-        '--pointer-from-center': `${clamp(Math.hypot(percentY - 50, percentX - 50) / 50, 0, 1)}`,
-        '--pointer-from-top': `${percentY / 100}`,
-        '--pointer-from-left': `${percentX / 100}`,
-        '--rotate-x': `${round(-(centerX / 5))}deg`,
-        '--rotate-y': `${round(centerY / 4)}deg`
-      } as Record<string, string>;
-
-      for (const [k, v] of Object.entries(properties)) wrap.style.setProperty(k, v);
-    };
-
-    const step = (ts: number) => {
-      if (!running) return;
-      if (lastTs === 0) lastTs = ts;
-      const dt = (ts - lastTs) / 1000;
-      lastTs = ts;
-
-      const tau = ts < initialUntil ? INITIAL_TAU : DEFAULT_TAU;
-      const k = 1 - Math.exp(-dt / tau);
-
-      currentX += (targetX - currentX) * k;
-      currentY += (targetY - currentY) * k;
-
-      setVarsFromXY(currentX, currentY);
-
-      const stillFar = Math.abs(targetX - currentX) > 0.05 || Math.abs(targetY - currentY) > 0.05;
-
-      if (stillFar || document.hasFocus()) {
-        rafId = requestAnimationFrame(step);
-      } else {
-        running = false;
-        lastTs = 0;
-        if (rafId) {
-          cancelAnimationFrame(rafId);
-          rafId = null;
-        }
-      }
-    };
-
-    const start = () => {
-      if (running) return;
-      running = true;
-      lastTs = 0;
-      rafId = requestAnimationFrame(step);
-    };
-
-    return {
-      setImmediate(x: number, y: number) {
-        currentX = x;
-        currentY = y;
-        setVarsFromXY(currentX, currentY);
-      },
-      setTarget(x: number, y: number) {
-        targetX = x;
-        targetY = y;
-        start();
-      },
-      toCenter() {
-        const shell = shellRef.current;
-        if (!shell) return;
-        this.setTarget(shell.clientWidth / 2, shell.clientHeight / 2);
-      },
-      beginInitial(durationMs: number) {
-        initialUntil = performance.now() + durationMs;
-        start();
-      },
-      getCurrent() {
-        return { x: currentX, y: currentY, tx: targetX, ty: targetY };
-      },
-      cancel() {
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = null;
-        running = false;
-        lastTs = 0;
-      }
-    };
-  }, [enableTilt]);
-
-  const getOffsets = (evt: PointerEvent, el: HTMLElement) => {
-    const rect = el.getBoundingClientRect();
-    return { x: evt.clientX - rect.left, y: evt.clientY - rect.top };
-  };
-
-  const handlePointerMove = useCallback(
-    (event: PointerEvent) => {
-      const shell = shellRef.current;
-      if (!shell || !tiltEngine) return;
-      const { x, y } = getOffsets(event, shell);
-      tiltEngine.setTarget(x, y);
-    },
-    [tiltEngine]
-  );
-
-  const handlePointerEnter = useCallback(
-    (event: PointerEvent) => {
-      const shell = shellRef.current;
-      if (!shell || !tiltEngine) return;
-
-      shell.classList.add('active');
-      shell.classList.add('entering');
-      if (enterTimerRef.current) window.clearTimeout(enterTimerRef.current);
-      enterTimerRef.current = window.setTimeout(() => {
-        shell.classList.remove('entering');
-      }, ANIMATION_CONFIG.ENTER_TRANSITION_MS);
-
-      const { x, y } = getOffsets(event, shell);
-      tiltEngine.setTarget(x, y);
-    },
-    [tiltEngine]
-  );
-
-  const handlePointerLeave = useCallback(() => {
-    const shell = shellRef.current;
-    if (!shell || !tiltEngine) return;
-
-    tiltEngine.toCenter();
-
-    const checkSettle = () => {
-      const { x, y, tx, ty } = tiltEngine.getCurrent();
-      const settled = Math.hypot(tx - x, ty - y) < 0.6;
-      if (settled) {
-        shell.classList.remove('active');
-        leaveRafRef.current = null;
-      } else {
-        leaveRafRef.current = requestAnimationFrame(checkSettle);
-      }
-    };
-    if (leaveRafRef.current) cancelAnimationFrame(leaveRafRef.current);
-    leaveRafRef.current = requestAnimationFrame(checkSettle);
-  }, [tiltEngine]);
-
-  const handleDeviceOrientation = useCallback(
-    (event: DeviceOrientationEvent) => {
-      const shell = shellRef.current;
-      if (!shell || !tiltEngine) return;
-
-      const { beta, gamma } = event;
-      if (beta == null || gamma == null) return;
-
-      const centerX = shell.clientWidth / 2;
-      const centerY = shell.clientHeight / 2;
-      const x = clamp(centerX + gamma * mobileTiltSensitivity, 0, shell.clientWidth);
-      const y = clamp(
-        centerY + (beta - ANIMATION_CONFIG.DEVICE_BETA_OFFSET) * mobileTiltSensitivity,
-        0,
-        shell.clientHeight
-      );
-
-      tiltEngine.setTarget(x, y);
-    },
-    [tiltEngine, mobileTiltSensitivity]
-  );
-
-  useEffect(() => {
-    if (!enableTilt || !tiltEngine) return;
-
-    const shell = shellRef.current;
-    if (!shell) return;
-
-    const pointerMoveHandler = handlePointerMove as EventListener;
-    const pointerEnterHandler = handlePointerEnter as EventListener;
-    const pointerLeaveHandler = handlePointerLeave as EventListener;
-    const deviceOrientationHandler = handleDeviceOrientation as EventListener;
-
-    shell.addEventListener('pointerenter', pointerEnterHandler);
-    shell.addEventListener('pointermove', pointerMoveHandler);
-    shell.addEventListener('pointerleave', pointerLeaveHandler);
-
-    const handleClick = () => {
-      if (!enableMobileTilt || location.protocol !== 'https:') return;
-      const anyMotion = window.DeviceMotionEvent as any;
-      if (anyMotion && typeof anyMotion.requestPermission === 'function') {
-        anyMotion
-          .requestPermission()
-          .then((state: string) => {
-            if (state === 'granted') {
-              window.addEventListener('deviceorientation', deviceOrientationHandler);
-            }
-          })
-          .catch(console.error);
-      } else {
-        window.addEventListener('deviceorientation', deviceOrientationHandler);
-      }
-    };
-    shell.addEventListener('click', handleClick);
-
-    const initialX = (shell.clientWidth || 0) - ANIMATION_CONFIG.INITIAL_X_OFFSET;
-    const initialY = ANIMATION_CONFIG.INITIAL_Y_OFFSET;
-    tiltEngine.setImmediate(initialX, initialY);
-    tiltEngine.toCenter();
-    tiltEngine.beginInitial(ANIMATION_CONFIG.INITIAL_DURATION);
-
-    return () => {
-      shell.removeEventListener('pointerenter', pointerEnterHandler);
-      shell.removeEventListener('pointermove', pointerMoveHandler);
-      shell.removeEventListener('pointerleave', pointerLeaveHandler);
-      shell.removeEventListener('click', handleClick);
-      window.removeEventListener('deviceorientation', deviceOrientationHandler);
-      if (enterTimerRef.current) window.clearTimeout(enterTimerRef.current);
-      if (leaveRafRef.current) cancelAnimationFrame(leaveRafRef.current);
-      tiltEngine.cancel();
-      shell.classList.remove('entering');
-    };
-  }, [
-    enableTilt,
-    enableMobileTilt,
-    tiltEngine,
-    handlePointerMove,
-    handlePointerEnter,
-    handlePointerLeave,
-    handleDeviceOrientation
-  ]);
-
-  const cardStyle = useMemo(
-    () =>
-      ({
-        '--icon': iconUrl ? `url(${iconUrl})` : 'none',
-        '--grain': grainUrl ? `url(${grainUrl})` : 'none',
-        '--inner-gradient': innerGradient ?? DEFAULT_INNER_GRADIENT,
-        '--behind-glow-color': behindGlowColor ?? 'rgba(125, 190, 255, 0.67)',
-        '--behind-glow-size': behindGlowSize ?? '50%'
-      }) as React.CSSProperties,
-    [iconUrl, grainUrl, innerGradient, behindGlowColor, behindGlowSize]
-  );
-
-  const handleContactClick = useCallback(() => {
-    onContactClick?.();
-  }, [onContactClick]);
-
+  // Use coloredAvatarUrl if available, otherwise avatarUrl
+  const imageToUse = coloredAvatarUrl || avatarUrl || '/profile.jpg';
+  
   return (
-    <div ref={wrapRef} className={`pc-card-wrapper ${className}`.trim()} style={cardStyle}>
-      {behindGlowEnabled && <div className="pc-behind" />}
-      <div ref={shellRef} className="pc-card-shell">
-        <div className="pc-card">
-          <div className="pc-bg-layer">
-            <div className="pc-inside" />
-            <div className="pc-shine" />
-            <div className="pc-glare" />
+    <div className={`new-profile-card ${className}`.trim()}>
+      <div className="new-profile-card-image-container">
+        <Image
+          className="new-profile-card-image"
+          src={imageToUse}
+          alt={`${name} avatar`}
+          width={400}
+          height={400}
+          priority
+          onError={e => {
+            const t = e.target as HTMLImageElement;
+            t.style.display = 'none';
+          }}
+        />
+      </div>
+      
+      <div className="new-profile-card-content">
+        <div className="new-profile-card-header">
+          <h2 className="new-profile-card-name">{name}</h2>
+          <svg className="new-profile-card-verified" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.243 2.502c1.026-.803 2.488-.803 3.514 0l1.246.974c.484.378 1.096.55 1.706.478l1.554-.183c1.288-.152 2.418.736 2.569 2.018l.183 1.554c.071.61.243 1.222.621 1.706l.974 1.246c.803 1.026.803 2.488 0 3.514l-.974 1.246c-.378.484-.55 1.096-.478 1.706l.183 1.554c.152 1.288-.736 2.418-2.018 2.569l-1.554.183c-.61.071-1.222.243-1.706.621l-1.246.974c-1.026.803-2.488.803-3.514 0l-1.246-.974c-.484-.378-1.096-.55-1.706-.478l-1.554.183c-1.288.152-2.418-.736-2.569-2.018l-.183-1.554c-.071-.61-.243-1.222-.621-1.706l-.974-1.246c-.803-1.026-.803-2.488 0-3.514l.974-1.246c.378-.484.55-1.096.478-1.706l-.183-1.554c-.152-1.288.736-2.418 2.018-2.569l1.554-.183c.61-.071 1.222-.243 1.706-.621l1.246-.974z" fill="#1DA1F2"/>
+            <path d="M10.5 15.5l-3-3 1.5-1.5 1.5 1.5 4.5-4.5 1.5 1.5-6 6z" fill="white"/>
+          </svg>
+        </div>
+        
+        <p className="new-profile-card-title">{title}</p>
+        
+        <div className="new-profile-card-footer">
+          <div className="new-profile-card-stats">
+            <div className="new-profile-card-stat">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>1k+</span>
+            </div>
+            <div className="new-profile-card-stat">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <span>60</span>
+            </div>
           </div>
           
-          <div className="pc-content pc-avatar-content">
-            <Image
-              className="avatar"
-              src={avatarUrl}
-              alt={`${name || 'User'} avatar`}
-              width={600}
-              height={800}
-              priority
-              onError={e => {
-                const t = e.target as HTMLImageElement;
-                t.style.display = 'none';
-              }}
-            />
-            {coloredAvatarUrl && (
-              <Image
-                className="avatar avatar-colored"
-                src={coloredAvatarUrl}
-                alt={`${name || 'User'} colored avatar`}
-                width={600}
-                height={800}
-                priority
-                onError={e => {
-                  const t = e.target as HTMLImageElement;
-                  t.style.display = 'none';
-                }}
-              />
-            )}
-          </div>
-
-          {showUserInfo && (
-            <div className="pc-user-info" style={{ justifyContent: 'center', background: 'transparent', border: 'none', backdropFilter: 'none' }}>
-              <button
-                className="pc-contact-btn"
-                onClick={handleContactClick}
-                type="button"
-                aria-label={`Contact ${name || 'user'}`}
-              >
-                <span className="default-text">{contactText}</span>
-                <span className="terminal-text">&gt; connect_now()</span>
-              </button>
-            </div>
-          )}
-
-          <div className="pc-border-glow" />
+          <button 
+            className="new-profile-card-btn"
+            onClick={onContactClick}
+            type="button"
+          >
+            {contactText}
+          </button>
         </div>
       </div>
     </div>

@@ -51,13 +51,13 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row items-start gap-4">
             <a
               href="#skills"
-              className="w-full sm:w-auto text-center px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-medium text-lg hover:scale-105 transition-transform"
+              className="w-full sm:w-auto text-center px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-medium text-lg hover:scale-105 hover:shadow-xl hover:shadow-black/20 dark:hover:shadow-white/20 transition-all duration-300"
             >
               Tech Skills
             </a>
             <a
               href="#coding-stats"
-              className="w-full sm:w-auto text-center px-8 py-4 border-2 border-zinc-200 dark:border-zinc-800 rounded-full font-medium text-lg hover:border-black dark:hover:border-white transition-colors"
+              className="w-full sm:w-auto text-center px-8 py-4 border-2 border-zinc-200 dark:border-zinc-800 rounded-full font-medium text-lg hover:border-black dark:hover:border-white hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all duration-300"
             >
               Coding Stats
             </a>
@@ -73,25 +73,15 @@ export default function Hero() {
           <ProfileCard
             name="Ganath Avinash G R"
             title="Software Engineer"
-            handle="Ganath-Avinash"
-            status="Online"
             contactText="Contact Me"
             avatarUrl="/imgs/titlecard/b&w.jpg"
             coloredAvatarUrl="/imgs/titlecard/pfp.jpeg"
-            miniAvatarUrl="/imgs/titlecard/b&w.jpg"
-            iconUrl="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyNSAxMzBMMTA1IDE1MGwyMCAyMG01MC00MGwyMCAyMC0yMCAyME0xNTUgMTIwTDE0NSAxODAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPg=="
-            showUserInfo={true}
-            enableTilt={true}
-            enableMobileTilt={true}
             onContactClick={() => {
               const contactSection = document.getElementById('contact');
               if (contactSection) {
                 contactSection.scrollIntoView({ behavior: 'smooth' });
               }
             }}
-            behindGlowColor="rgba(125, 190, 255, 0.67)"
-            behindGlowEnabled={true}
-            innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
           />
         </motion.div>
       </div>

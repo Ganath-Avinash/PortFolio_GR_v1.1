@@ -30,9 +30,7 @@ export default function Footer() {
         <p className="text-zinc-400 text-sm">
           © {new Date().getFullYear()} Ganath Avinash G R. All rights reserved.
         </p>
-        <p className="text-zinc-400 text-sm text-center md:text-right">
-          Built with React, Next.js, and Tailwind CSS.
-        </p>
+
       </div>
     </footer>
   );

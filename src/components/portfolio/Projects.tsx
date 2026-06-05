@@ -30,10 +30,10 @@ export default function Projects() {
               className="group bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col"
             >
               <div className="aspect-video bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 overflow-hidden relative">
-                <Image src={project.image} alt={project.title} fill className="object-cover hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+                <Image src={project.image} alt={project.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
               </div>
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{project.title}</h3>
                 <p className="text-zinc-600 dark:text-zinc-400 mb-4">{project.description}</p>
                 <div className="flex gap-3 mt-auto pt-4">
                   <a href={project.liveLink} target={project.liveLink.startsWith('http') ? "_blank" : undefined} rel={project.liveLink.startsWith('http') ? "noopener noreferrer" : undefined} className="px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg text-sm font-medium hover:opacity-80 transition-opacity">
